@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TransferCephesi</title>
+<title>TRansfer Cephesi</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
@@ -32,10 +32,9 @@ body{
   font-family:Inter,sans-serif;
   background:var(--soft);
   color:var(--text);
-  transition:.3s;
 }
 
-/* SON DAKİKA */
+/* SON DAKİKA BAR */
 .breaking-bar{
   background:var(--red);
   color:#fff;
@@ -62,27 +61,42 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:14px;
 }
 header h1{
   margin:0;
   font-weight:800;
-  letter-spacing:1px;
+}
+.header-right{
+  display:flex;
+  gap:10px;
 }
 header input{
   padding:10px 14px;
   border:none;
   border-radius:6px;
-  font-weight:600;
 }
 .mode-btn{
-  margin-left:10px;
   background:#fff;
-  color:#000;
   border:none;
-  padding:9px 14px;
-  border-radius:6px;
+  padding:10px 16px;
   font-weight:700;
+  border-radius:6px;
   cursor:pointer;
+}
+
+/* MOBİL */
+@media(max-width:768px){
+  header{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .header-right{
+    flex-direction:column;
+  }
+  header input,.mode-btn{
+    width:100%;
+  }
 }
 
 /* FİLTRE */
@@ -93,12 +107,11 @@ header input{
   transform:translateY(-50%);
   background:var(--dark);
   color:#fff;
-  padding:14px 16px;
-  border-radius:50%;
+  padding:14px 18px;
+  border-radius:999px;
   font-weight:800;
   cursor:pointer;
-  z-index:1001;
-  box-shadow:0 6px 18px rgba(0,0,0,.35);
+  z-index:9999;
 }
 
 .filter-panel{
@@ -108,19 +121,17 @@ header input{
   width:280px;
   height:100%;
   background:var(--card);
-  box-shadow:4px 0 30px rgba(0,0,0,.4);
   padding:20px;
   transition:.4s;
-  z-index:1000;
+  z-index:9998;
 }
 .filter-panel button{
   width:100%;
   margin-bottom:10px;
-  padding:10px;
+  padding:12px;
   border:none;
   border-radius:6px;
   font-weight:700;
-  cursor:pointer;
 }
 
 /* CONTENT */
@@ -137,36 +148,38 @@ header input{
 
 /* CARD */
 .card{
+  position:relative; /* 🔥 EN ÖNEMLİ DÜZELTME */
   background:var(--card);
-  border-radius:8px;
-  box-shadow:0 8px 24px rgba(0,0,0,.18);
+  border-radius:10px;
+  box-shadow:0 10px 26px rgba(0,0,0,.18);
   overflow:hidden;
-  position:relative;
   transition:.3s;
 }
-.card:hover{transform:translateY(-4px)}
+.card:hover{transform:translateY(-6px)}
 .card img{
   width:100%;
   height:170px;
   object-fit:cover;
 }
 
+/* RIBBON */
 .ribbon{
   position:absolute;
-  top:14px;
-  right:-45px;
+  top:12px;
+  right:-42px;
   background:var(--red);
   color:#fff;
-  padding:6px 50px;
+  padding:6px 46px;
   font-size:11px;
-  font-weight:700;
+  font-weight:800;
   transform:rotate(45deg);
+  z-index:5;
 }
 
 .team{
   position:absolute;
-  top:14px;
-  left:14px;
+  top:12px;
+  left:12px;
   background:var(--blue);
   color:#fff;
   font-size:11px;
@@ -176,16 +189,14 @@ header input{
 
 .card-body{padding:16px}
 .player{font-size:17px;font-weight:700}
-.detail{font-size:13px;color:#888;margin-top:2px}
+.detail{font-size:13px;color:#888}
 .market{font-size:13px;font-weight:600;margin-top:6px}
 
-/* İSTATİSTİK BAR */
 .bar{
   background:var(--gray);
   height:6px;
   border-radius:4px;
   margin-top:8px;
-  overflow:hidden;
 }
 .bar span{
   display:block;
@@ -228,13 +239,12 @@ footer{
   <button onclick="setFilter('all')">TÜMÜ</button>
   <button onclick="setFilter('Galatasaray')">GALATASARAY</button>
   <button onclick="setFilter('Fenerbahçe')">FENERBAHÇE</button>
-  <button onclick="setFilter('Beşiktaş')">BEŞİKTAŞ</button>
   <button onclick="setFilter('son')" style="background:#c70000;color:#fff">SON DAKİKA</button>
 </div>
 
 <header>
   <h1>TRansfer Cephesi</h1>
-  <div>
+  <div class="header-right">
     <input id="searchInput" placeholder="Oyuncu ara..." onkeyup="searchPlayer()">
     <button class="mode-btn" onclick="toggleMode()">Dark Mode</button>
   </div>
@@ -244,13 +254,11 @@ footer{
   <div class="grid" id="cards"></div>
 </div>
 
-<footer>© 2026 TRansferCephesi</footer>
+<footer>© 2026 TRansfer Cephesi</footer>
 
 <script>
 const transfers=[
 {team:"Galatasaray",player:"Omar Marmoush",from:"Man City",to:"Galatasaray",market:"€65 M",prob:65,son:true,image:"https://www.90min.tr/uploads/images/202601/image_870x_69663c27510b7.webp",status:"wait"},
-{team:"Galatasaray",player:"Ahmet Kutucu",from:"Galatasaray",to:"Real Madrid",market:"€4 M",prob:40,son:false,image:"https://image.hurimg.com/i/hurriyet/90/0x0/60df23774e3fe111f8e5c811.jpg",status:"wait"},
-{team:"Galatasaray",player:"Jude Bellingham",from:"Real Madrid",to:"Galatasaray",market:"€160 M",prob:10,son:false,image:"https://assets.bundesliga.com/contender/2024/4/imago1034602594h.jpg",status:"wait"},
 {team:"Galatasaray",player:"Hakan Çalhanoğlu",from:"Inter",to:"Galatasaray",market:"€22 M",prob:55,son:true,image:"https://imgrosetta.mynet.com.tr/file/22927669/1200xauto.jpg",status:"wait"},
 {team:"Fenerbahçe",player:"N'Golo Kanté",from:"Al-Ittihad",to:"Fenerbahçe",market:"€4.5 M",prob:100,son:true,image:"https://sonmuhurcom.teimg.com/crop/1280x720/sonmuhur-com/uploads/2026/01/kante-1.jpg",status:"ok"}
 ];
