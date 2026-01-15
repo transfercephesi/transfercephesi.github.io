@@ -45,11 +45,11 @@ body{
 }
 .breaking-text{
   display:inline-block;
-  padding:10px 0;
-  animation:scroll 22s linear infinite;
+  padding:10px 0 10px 100vw; /* 🔥 akışkan başlangıç */
+  animation:scroll 25s linear infinite;
 }
 @keyframes scroll{
-  0%{transform:translateX(100%)}
+  0%{transform:translateX(0)}
   100%{transform:translateX(-100%)}
 }
 
@@ -132,6 +132,13 @@ header input{
   border:none;
   border-radius:6px;
   font-weight:700;
+  cursor:pointer;
+}
+
+/* 🔥 AKTİF FİLTRE */
+.filter-panel button.active-filter{
+  background:var(--blue);
+  color:#fff;
 }
 
 /* CONTENT */
@@ -148,7 +155,7 @@ header input{
 
 /* CARD */
 .card{
-  position:relative; /* 🔥 EN ÖNEMLİ DÜZELTME */
+  position:relative;
   background:var(--card);
   border-radius:10px;
   box-shadow:0 10px 26px rgba(0,0,0,.18);
@@ -236,10 +243,10 @@ footer{
 <div class="filter-btn" onclick="toggleFilter()">☰</div>
 
 <div class="filter-panel" id="filterPanel">
-  <button onclick="setFilter('all')">TÜMÜ</button>
-  <button onclick="setFilter('Galatasaray')">GALATASARAY</button>
-  <button onclick="setFilter('Fenerbahçe')">FENERBAHÇE</button>
-  <button onclick="setFilter('son')" style="background:#c70000;color:#fff">SON DAKİKA</button>
+  <button onclick="setFilter('all',this)" class="active-filter">TÜMÜ</button>
+  <button onclick="setFilter('Galatasaray',this)">GALATASARAY</button>
+  <button onclick="setFilter('Fenerbahçe',this)">FENERBAHÇE</button>
+  <button onclick="setFilter('son',this)" style="background:#c70000;color:#fff">SON DAKİKA</button>
 </div>
 
 <header>
@@ -265,6 +272,7 @@ const transfers=[
 
 let active="all",open=false;
 const cards=document.getElementById("cards");
+const filterButtons=document.querySelectorAll(".filter-panel button");
 
 function render(list){
   cards.innerHTML=list.map(t=>`
@@ -295,8 +303,10 @@ function toggleFilter(){
   filterPanel.style.left=open?"0":"-280px";
 }
 
-function setFilter(v){
+function setFilter(v,btn){
   active=v;
+  filterButtons.forEach(b=>b.classList.remove("active-filter"));
+  btn.classList.add("active-filter");
   searchPlayer();
   toggleFilter();
 }
