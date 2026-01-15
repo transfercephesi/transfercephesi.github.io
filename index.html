@@ -3,86 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TRansferCephesi</title>
+<title>TransferCephesi</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --blue:#0b3c78;
-  --dark:#0a1f44;
-  --red:#e10600;
+  --blue:#1e4fa1;
+  --dark:#0b1f3a;
+  --soft:#f4f7fc;
+  --card:#ffffff;
+  --text:#111;
+  --red:#c70000;
+  --gray:#e6e9f0;
+}
+
+body.dark{
+  --soft:#0e1624;
+  --card:#151f33;
+  --text:#f1f1f1;
+  --gray:#24304a;
 }
 
 *{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family:"Inter",sans-serif;
-  background:#f2f5fb;
-  color:#111;
+  font-family:Inter,sans-serif;
+  background:var(--soft);
+  color:var(--text);
+  transition:.3s;
 }
 
-/* ===== SON DAKİKA ===== */
+/* SON DAKİKA */
 .breaking-bar{
   background:var(--red);
   color:#fff;
   overflow:hidden;
   white-space:nowrap;
-  font-weight:800;
-  font-size:13px;
+  font-size:12px;
+  font-weight:700;
 }
-
 .breaking-text{
   display:inline-block;
   padding:10px 0;
   animation:scroll 22s linear infinite;
 }
-
 @keyframes scroll{
   0%{transform:translateX(100%)}
   100%{transform:translateX(-100%)}
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header{
-  background:linear-gradient(135deg,var(--dark),var(--blue));
+  background:linear-gradient(90deg,var(--dark),var(--blue));
   color:#fff;
-  padding:18px 22px;
+  padding:16px 24px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  flex-wrap:wrap;
-  box-shadow:0 6px 25px rgba(0,0,0,.35);
 }
-
 header h1{
   margin:0;
-  font-size:26px;
   font-weight:800;
+  letter-spacing:1px;
 }
-
-.search input{
+header input{
   padding:10px 14px;
-  border-radius:10px;
   border:none;
+  border-radius:6px;
   font-weight:600;
-  outline:none;
+}
+.mode-btn{
+  margin-left:10px;
+  background:#fff;
+  color:#000;
+  border:none;
+  padding:9px 14px;
+  border-radius:6px;
+  font-weight:700;
+  cursor:pointer;
 }
 
-/* ===== SLIDE FILTER ===== */
+/* FİLTRE */
 .filter-btn{
   position:fixed;
   top:50%;
-  left:0;
+  left:14px;
   transform:translateY(-50%);
   background:var(--dark);
   color:#fff;
-  padding:12px 10px;
+  padding:14px 16px;
+  border-radius:50%;
   font-weight:800;
-  border-radius:0 10px 10px 0;
   cursor:pointer;
-  z-index:999;
+  z-index:1001;
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
 }
 
 .filter-panel{
@@ -91,68 +107,44 @@ header h1{
   left:-280px;
   width:280px;
   height:100%;
-  background:#fff;
-  box-shadow:4px 0 30px rgba(0,0,0,.25);
+  background:var(--card);
+  box-shadow:4px 0 30px rgba(0,0,0,.4);
   padding:20px;
-  transition:.4s ease;
-  z-index:998;
+  transition:.4s;
+  z-index:1000;
 }
-
-.filter-panel h3{
-  margin-top:0;
-  margin-bottom:16px;
-  font-size:18px;
-  border-bottom:2px solid #eee;
-  padding-bottom:8px;
-}
-
 .filter-panel button{
   width:100%;
   margin-bottom:10px;
   padding:10px;
   border:none;
-  border-radius:10px;
-  background:#f2f4f8;
+  border-radius:6px;
   font-weight:700;
   cursor:pointer;
 }
 
-.filter-panel button:hover{
-  background:#dde6ff;
-}
-
-.filter-panel .red{
-  background:var(--red);
-  color:#fff;
-}
-
-/* ===== CONTENT ===== */
+/* CONTENT */
 .container{
   max-width:1250px;
   margin:auto;
   padding:26px 18px;
 }
-
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:22px;
 }
 
-/* ===== CARD ===== */
+/* CARD */
 .card{
-  background:#fff;
-  border-radius:16px;
-  box-shadow:0 12px 30px rgba(0,0,0,.1);
+  background:var(--card);
+  border-radius:8px;
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
   overflow:hidden;
-  transition:.35s;
   position:relative;
+  transition:.3s;
 }
-
-.card:hover{
-  transform:translateY(-8px);
-}
-
+.card:hover{transform:translateY(-4px)}
 .card img{
   width:100%;
   height:170px;
@@ -162,12 +154,12 @@ header h1{
 .ribbon{
   position:absolute;
   top:14px;
-  right:-48px;
+  right:-45px;
   background:var(--red);
   color:#fff;
-  padding:7px 55px;
-  font-size:12px;
-  font-weight:800;
+  padding:6px 50px;
+  font-size:11px;
+  font-weight:700;
   transform:rotate(45deg);
 }
 
@@ -175,55 +167,51 @@ header h1{
   position:absolute;
   top:14px;
   left:14px;
-  background:#1e66c8;
+  background:var(--blue);
   color:#fff;
-  font-size:12px;
-  padding:6px 12px;
-  border-radius:20px;
+  font-size:11px;
+  padding:6px 10px;
   font-weight:700;
 }
 
 .card-body{padding:16px}
+.player{font-size:17px;font-weight:700}
+.detail{font-size:13px;color:#888;margin-top:2px}
+.market{font-size:13px;font-weight:600;margin-top:6px}
 
-.player{font-size:18px;font-weight:800}
-.detail{font-size:14px}
-.market{margin-top:6px;font-weight:600}
-
-.prob{
-  display:inline-block;
-  margin-top:6px;
-  padding:5px 12px;
-  border-radius:16px;
-  font-size:12px;
-  font-weight:700;
-  color:#fff;
+/* İSTATİSTİK BAR */
+.bar{
+  background:var(--gray);
+  height:6px;
+  border-radius:4px;
+  margin-top:8px;
+  overflow:hidden;
 }
-
-.high{background:#27ae60}
-.mid{background:#f39c12}
-.low{background:#e74c3c}
-
-.date{font-size:12px;color:#666;margin-top:6px}
+.bar span{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,#2ecc71,#f39c12,#e74c3c);
+}
 
 .status{
-  display:inline-block;
   margin-top:10px;
-  padding:6px 16px;
-  border-radius:20px;
-  font-size:12px;
+  padding:6px 14px;
+  font-size:11px;
   font-weight:800;
+  display:inline-block;
+  border-radius:6px;
   color:#fff;
 }
-
-.gerceklesmis{background:#2ecc71}
-.beklemede{background:#f39c12}
+.ok{background:#27ae60}
+.wait{background:#f39c12}
 
 footer{
   text-align:center;
-  padding:22px;
-  background:linear-gradient(135deg,var(--dark),var(--blue));
+  padding:20px;
+  background:linear-gradient(90deg,var(--dark),var(--blue));
   color:#fff;
   margin-top:40px;
+  font-size:13px;
 }
 </style>
 </head>
@@ -234,21 +222,21 @@ footer{
   <div class="breaking-text" id="breakingText"></div>
 </div>
 
-<div class="filter-btn" onclick="toggleFilter()">☰ FİLTRE</div>
+<div class="filter-btn" onclick="toggleFilter()">☰</div>
 
 <div class="filter-panel" id="filterPanel">
-  <h3>Filtreleme</h3>
-  <button onclick="setFilter('all')">Tüm Takımlar</button>
-  <button onclick="setFilter('Galatasaray')">Galatasaray</button>
-  <button onclick="setFilter('Fenerbahçe')">Fenerbahçe</button>
-  <button onclick="setFilter('Beşiktaş')">Beşiktaş</button>
-  <button class="red" onclick="setFilter('son')">🔴 Son Dakika</button>
+  <button onclick="setFilter('all')">TÜMÜ</button>
+  <button onclick="setFilter('Galatasaray')">GALATASARAY</button>
+  <button onclick="setFilter('Fenerbahçe')">FENERBAHÇE</button>
+  <button onclick="setFilter('Beşiktaş')">BEŞİKTAŞ</button>
+  <button onclick="setFilter('son')" style="background:#c70000;color:#fff">SON DAKİKA</button>
 </div>
 
 <header>
-  <h1>TRansferCephesi</h1>
-  <div class="search">
-    <input type="text" id="searchInput" placeholder="Oyuncu ara..." onkeyup="searchPlayer()">
+  <h1>TRansfer Cephesi</h1>
+  <div>
+    <input id="searchInput" placeholder="Oyuncu ara..." onkeyup="searchPlayer()">
+    <button class="mode-btn" onclick="toggleMode()">Dark Mode</button>
   </div>
 </header>
 
@@ -260,16 +248,15 @@ footer{
 
 <script>
 const transfers=[
-{team:"Galatasaray",player:"Omar Marmoush",from:"Man. City",to:"Galatasaray",date:"14.01.2026",time:"21:35",status:"beklemede",market:"€65 M",prob:65,son:true,image:"https://www.90min.tr/uploads/images/202601/image_870x_69663c27510b7.webp"},
-{team:"Galatasaray",player:"Ahmet Kutucu",from:"Galatasaray",to:"Real Madrid",date:"14.01.2026",time:"21:38",status:"beklemede",market:"€4 M",prob:40,son:false,image:"https://image.hurimg.com/i/hurriyet/90/0x0/60df23774e3fe111f8e5c811.jpg"},
-{team:"Galatasaray",player:"Jude Bellingham",from:"Real Madrid",to:"Galatasaray",date:"15.01.2026",time:"08:38",status:"beklemede",market:"€160 M",prob:10,son:false,image:"https://assets.bundesliga.com/contender/2024/4/imago1034602594h.jpg"},
-{team:"Galatasaray",player:"Hakan Çalhanoğlu",from:"Inter",to:"Galatasaray",date:"14.01.2026",time:"22:35",status:"beklemede",market:"€22 M",prob:55,son:true,image:"https://imgrosetta.mynet.com.tr/file/22927669/1200xauto.jpg"},
-{team:"Fenerbahçe",player:"N'Golo Kanté",from:"Al-Ittihad",to:"Fenerbahçe",date:"14.01.2026",time:"21:36",status:"gerçekleşti",market:"€4.5 M",prob:100,son:true,image:"https://sonmuhurcom.teimg.com/crop/1280x720/sonmuhur-com/uploads/2026/01/kante-1.jpg"}
+{team:"Galatasaray",player:"Omar Marmoush",from:"Man City",to:"Galatasaray",market:"€65 M",prob:65,son:true,image:"https://www.90min.tr/uploads/images/202601/image_870x_69663c27510b7.webp",status:"wait"},
+{team:"Galatasaray",player:"Ahmet Kutucu",from:"Galatasaray",to:"Real Madrid",market:"€4 M",prob:40,son:false,image:"https://image.hurimg.com/i/hurriyet/90/0x0/60df23774e3fe111f8e5c811.jpg",status:"wait"},
+{team:"Galatasaray",player:"Jude Bellingham",from:"Real Madrid",to:"Galatasaray",market:"€160 M",prob:10,son:false,image:"https://assets.bundesliga.com/contender/2024/4/imago1034602594h.jpg",status:"wait"},
+{team:"Galatasaray",player:"Hakan Çalhanoğlu",from:"Inter",to:"Galatasaray",market:"€22 M",prob:55,son:true,image:"https://imgrosetta.mynet.com.tr/file/22927669/1200xauto.jpg",status:"wait"},
+{team:"Fenerbahçe",player:"N'Golo Kanté",from:"Al-Ittihad",to:"Fenerbahçe",market:"€4.5 M",prob:100,son:true,image:"https://sonmuhurcom.teimg.com/crop/1280x720/sonmuhur-com/uploads/2026/01/kante-1.jpg",status:"ok"}
 ];
 
 let active="all",open=false;
-
-function probClass(p){return p>=60?"high":p>=30?"mid":"low"}
+const cards=document.getElementById("cards");
 
 function render(list){
   cards.innerHTML=list.map(t=>`
@@ -279,11 +266,10 @@ function render(list){
     <div class="team">${t.team}</div>
     <div class="card-body">
       <div class="player">${t.player}</div>
-      <div class="detail">${t.from} ➜ ${t.to}</div>
-      <div class="market">💰 ${t.market}</div>
-      <div class="prob ${probClass(t.prob)}">%${t.prob}</div>
-      <div class="date">🕒 ${t.date} | ${t.time}</div>
-      <div class="status ${t.status==="gerçekleşti"?"gerceklesmis":"beklemede"}">${t.status.toUpperCase()}</div>
+      <div class="detail">${t.from} → ${t.to}</div>
+      <div class="market">Piyasa Değeri: ${t.market}</div>
+      <div class="bar"><span style="width:${t.prob}%"></span></div>
+      <div class="status ${t.status}">${t.status==="ok"?"TRansfer":"Beklemede"}</div>
     </div>
   </div>`).join("");
 }
@@ -307,8 +293,12 @@ function setFilter(v){
   toggleFilter();
 }
 
+function toggleMode(){
+  document.body.classList.toggle("dark");
+}
+
 render(transfers);
-breakingText.innerText=" 🔴 SON DAKİKA • "+transfers.filter(t=>t.son).map(t=>t.player+" transferi").join(" • ");
+breakingText.innerText="SON DAKİKA • "+transfers.filter(t=>t.son).map(t=>t.player+" TRansferi").join(" • ");
 </script>
 
 </body>
