@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRansferCephesi</title>
+
+  <style>
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef4ff}
+
+    header{
+      background:#0b3c78;
+      color:#fff;
+      padding:15px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    header h1{margin:0;font-size:22px}
+
+    .menu select,.search input{
+      padding:7px 10px;
+      border-radius:6px;
+      border:none;
+      font-weight:bold;
+    }
+
+    .search input{width:180px}
+
+    .container{max-width:1100px;margin:auto;padding:10px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .card{background:#fff;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.1);overflow:hidden}
+    .card img{width:100%;height:130px;object-fit:cover}
+    .card-body{padding:10px;font-size:14px}
+    .team{font-weight:bold;color:#1e66c8;font-size:13px}
+    .player{font-size:15px;font-weight:bold;margin:5px 0}
+    .detail{font-size:13px;color:#333}
+    .date{font-size:12px;color:#666;margin-top:4px}
+
+    .status{
+      display:inline-block;
+      margin-top:6px;
+      padding:4px 10px;
+      border-radius:12px;
+      font-size:12px;
+      font-weight:bold;
+      color:#fff;
+    }
+    .gerceklesmis{background:#2ecc71}
+    .beklemede{background:#f39c12}
+
+    footer{text-align:center;padding:15px;background:#0b3c78;color:#fff;margin-top:20px;font-size:13px}
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>TRansferCephesi</h1>
+
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Oyuncu ara..." onkeyup="searchPlayer()">
+  </div>
+
+  <div class="menu">
+    <select id="teamSelect" onchange="filterTeam(this.value)">
+      <option value="all">Tüm Takımlar</option>
+      <option value="Galatasaray">Galatasaray</option>
+      <option value="Fenerbahçe">Fenerbahçe</option>
+      <option value="Beşiktaş">Beşiktaş</option>
+    </select>
+  </div>
+</header>
+
+<div class="container">
+  <div class="grid" id="cards"></div>
+</div>
+
+<footer>© 2026 TRansferCephesi</footer>
+
+<script>
+const transfers = [
+  {
+    team:"Galatasaray",
+    player:"Omar Marmoush",
+    from:"Man. City",
+    to:"Galatasaray",
+    date:"14.01.2026",
+    time:"21:35",
+    status:"beklemede",
+    image:"https://www.90min.tr/uploads/images/202601/image_870x_69663c27510b7.webp"
+  },
+  {
+    team:"Galatasaray",
+    player:"Ahmet Kutucu",
+    from:"Galatasaray",
+    to:"Real Madrid",
+    date:"14.01.2026",
+    time:"21:38",
+    status:"beklemede",
+    image:"https://image.hurimg.com/i/hurriyet/90/0x0/60df23774e3fe111f8e5c811.jpg"
+  },
+  {
+    team:"Galatasaray",
+    player:"Bellingham",
+    from:"Real Madrid",
+    to:"Galatasaray",
+    date:"15.01.2026",
+    time:"08:38",
+    status:"beklemede",
+    image:"https://assets.bundesliga.com/contender/2024/4/imago1034602594h.jpg?crop=0px,234px,4500px,2531px&fit=1200,675"
+  },
+  {
+    team:"Galatasaray",
+    player:"Hakan Çalhanoğlu",
+    from:"İnter Milan",
+    to:"Galatasaray",
+    date:"14.01.2026",
+    time:"22:35",
+    status:"beklemede",
+    image:"https://imgrosetta.mynet.com.tr/file/22927669/1200xauto.jpg"
+  },
+  {
+    team:"Fenerbahçe",
+    player:"Ngolo Kante",
+    from:"El-İttihad",
+    to:"Fenerbahçe",
+    date:"14.01.2026",
+    time:"21:36",
+    status:"gerçekleşti",
+    image:"https://sonmuhurcom.teimg.com/crop/1280x720/sonmuhur-com/uploads/2026/01/kante-1.jpg"
+  },
+  {
+    team:"Beşiktaş",
+    player:"Pele",
+    from:"Santos",
+    to:"Beşiktaş",
+    date:"14.01.2026",
+    time:"21:37",
+    status:"gerçekleşti",
+    image:"https://cdn.yenicaggazetesi.com/news/2022/12/301220221734151026990.jpeg"
+  }
+];
+
+let activeTeam = "all";
+
+function render(list){
+  const area=document.getElementById("cards");
+  area.innerHTML="";
+  list.forEach(t=>{
+    area.innerHTML+=`
+      <div class="card">
+        <img src="${t.image}">
+        <div class="card-body">
+          <div class="team">${t.team}</div>
+          <div class="player">${t.player}</div>
+          <div class="detail">${t.from} ➜ ${t.to}</div>
+          <div class="date">🕒 ${t.date} | ${t.time}</div>
+          <div class="status ${t.status === 'gerçekleşti' ? 'gerceklesmis' : 'beklemede'}">
+            ${t.status.toUpperCase()}
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function filterTeam(team){
+  activeTeam = team;
+  searchPlayer();
+}
+
+function searchPlayer(){
+  const text = document.getElementById("searchInput").value.toLowerCase();
+  let filtered = transfers.filter(t =>
+    t.player.toLowerCase().includes(text)
+  );
+
+  if(activeTeam !== "all"){
+    filtered = filtered.filter(t => t.team === activeTeam);
+  }
+
+  render(filtered);
+}
+
+render(transfers);
+</script>
+
+</body>
+</html>
