@@ -5,30 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TRansferCephesi</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-:root{--blue:#0b3c78}
+:root{
+  --blue:#0b3c78;
+  --dark:#0a1f44;
+  --red:#e10600;
+}
+
 *{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family:"Segoe UI",Arial,sans-serif;
-  background:linear-gradient(180deg,#eef4ff,#dfe9ff);
+  font-family:"Inter",sans-serif;
+  background:#f2f5fb;
+  color:#111;
 }
 
-/* ===== SON DAKİKA KAYAN ŞERİT ===== */
+/* ===== SON DAKİKA ===== */
 .breaking-bar{
-  background:#e10600;
+  background:var(--red);
   color:#fff;
   overflow:hidden;
   white-space:nowrap;
   font-weight:800;
-  font-size:14px;
+  font-size:13px;
 }
 
 .breaking-text{
   display:inline-block;
   padding:10px 0;
-  animation:scroll 20s linear infinite;
+  animation:scroll 22s linear infinite;
 }
 
 @keyframes scroll{
@@ -36,96 +44,156 @@ body{
   100%{transform:translateX(-100%)}
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 header{
-  background:linear-gradient(135deg,#0b3c78,#144fa1);
+  background:linear-gradient(135deg,var(--dark),var(--blue));
   color:#fff;
-  padding:16px 20px;
+  padding:18px 22px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
-  gap:10px;
-  box-shadow:0 4px 15px rgba(0,0,0,.25);
+  box-shadow:0 6px 25px rgba(0,0,0,.35);
 }
 
-header h1{margin:0;font-size:24px}
+header h1{
+  margin:0;
+  font-size:26px;
+  font-weight:800;
+}
 
-.menu select,.search input{
-  padding:8px 12px;
-  border-radius:8px;
+.search input{
+  padding:10px 14px;
+  border-radius:10px;
   border:none;
   font-weight:600;
   outline:none;
 }
 
-.search input{width:200px}
-
-/* CONTENT */
-.container{max-width:1200px;margin:auto;padding:20px}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:18px;
+/* ===== SLIDE FILTER ===== */
+.filter-btn{
+  position:fixed;
+  top:50%;
+  left:0;
+  transform:translateY(-50%);
+  background:var(--dark);
+  color:#fff;
+  padding:12px 10px;
+  font-weight:800;
+  border-radius:0 10px 10px 0;
+  cursor:pointer;
+  z-index:999;
 }
 
-/* CARD */
+.filter-panel{
+  position:fixed;
+  top:0;
+  left:-280px;
+  width:280px;
+  height:100%;
+  background:#fff;
+  box-shadow:4px 0 30px rgba(0,0,0,.25);
+  padding:20px;
+  transition:.4s ease;
+  z-index:998;
+}
+
+.filter-panel h3{
+  margin-top:0;
+  margin-bottom:16px;
+  font-size:18px;
+  border-bottom:2px solid #eee;
+  padding-bottom:8px;
+}
+
+.filter-panel button{
+  width:100%;
+  margin-bottom:10px;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:#f2f4f8;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.filter-panel button:hover{
+  background:#dde6ff;
+}
+
+.filter-panel .red{
+  background:var(--red);
+  color:#fff;
+}
+
+/* ===== CONTENT ===== */
+.container{
+  max-width:1250px;
+  margin:auto;
+  padding:26px 18px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
+}
+
+/* ===== CARD ===== */
 .card{
   background:#fff;
-  border-radius:14px;
-  box-shadow:0 10px 25px rgba(0,0,0,.12);
+  border-radius:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,.1);
   overflow:hidden;
-  transition:.3s;
+  transition:.35s;
   position:relative;
 }
 
-.card:hover{transform:translateY(-6px)}
+.card:hover{
+  transform:translateY(-8px);
+}
 
 .card img{
   width:100%;
-  height:150px;
+  height:170px;
   object-fit:cover;
 }
 
-/* CARD SON DAKİKA */
 .ribbon{
   position:absolute;
-  top:0;
-  right:-45px;
-  background:#e10600;
+  top:14px;
+  right:-48px;
+  background:var(--red);
   color:#fff;
-  padding:6px 50px;
+  padding:7px 55px;
   font-size:12px;
   font-weight:800;
   transform:rotate(45deg);
 }
 
-/* TEAM */
 .team{
   position:absolute;
-  top:12px;
-  left:12px;
+  top:14px;
+  left:14px;
   background:#1e66c8;
   color:#fff;
   font-size:12px;
-  padding:5px 10px;
+  padding:6px 12px;
   border-radius:20px;
   font-weight:700;
 }
 
-.card-body{padding:14px}
-.player{font-size:17px;font-weight:700;margin:6px 0}
-.detail{font-size:14px;color:#333}
-.date{font-size:12px;color:#666;margin-top:6px}
+.card-body{padding:16px}
 
-.market{font-size:13px;margin-top:6px}
-.market span{font-weight:700}
+.player{font-size:18px;font-weight:800}
+.detail{font-size:14px}
+.market{margin-top:6px;font-weight:600}
 
 .prob{
   display:inline-block;
   margin-top:6px;
-  padding:4px 10px;
-  border-radius:14px;
+  padding:5px 12px;
+  border-radius:16px;
   font-size:12px;
   font-weight:700;
   color:#fff;
@@ -135,14 +203,15 @@ header h1{margin:0;font-size:24px}
 .mid{background:#f39c12}
 .low{background:#e74c3c}
 
-/* STATUS */
+.date{font-size:12px;color:#666;margin-top:6px}
+
 .status{
   display:inline-block;
   margin-top:10px;
-  padding:6px 14px;
+  padding:6px 16px;
   border-radius:20px;
   font-size:12px;
-  font-weight:700;
+  font-weight:800;
   color:#fff;
 }
 
@@ -151,39 +220,35 @@ header h1{margin:0;font-size:24px}
 
 footer{
   text-align:center;
-  padding:18px;
-  background:linear-gradient(135deg,#0b3c78,#144fa1);
+  padding:22px;
+  background:linear-gradient(135deg,var(--dark),var(--blue));
   color:#fff;
-  font-size:13px;
-  margin-top:30px;
+  margin-top:40px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- KAYAN SON DAKİKA -->
 <div class="breaking-bar">
-  <div class="breaking-text" id="breakingText">
-    🔴 SON DAKİKA • TransferCephesi • Güncel Transfer Haberleri •
-  </div>
+  <div class="breaking-text" id="breakingText"></div>
+</div>
+
+<div class="filter-btn" onclick="toggleFilter()">☰ FİLTRE</div>
+
+<div class="filter-panel" id="filterPanel">
+  <h3>Filtreleme</h3>
+  <button onclick="setFilter('all')">Tüm Takımlar</button>
+  <button onclick="setFilter('Galatasaray')">Galatasaray</button>
+  <button onclick="setFilter('Fenerbahçe')">Fenerbahçe</button>
+  <button onclick="setFilter('Beşiktaş')">Beşiktaş</button>
+  <button class="red" onclick="setFilter('son')">🔴 Son Dakika</button>
 </div>
 
 <header>
   <h1>TRansferCephesi</h1>
-
   <div class="search">
     <input type="text" id="searchInput" placeholder="Oyuncu ara..." onkeyup="searchPlayer()">
-  </div>
-
-  <div class="menu">
-    <select onchange="filterTeam(this.value)">
-      <option value="all">Tüm Takımlar</option>
-      <option value="Galatasaray">Galatasaray</option>
-      <option value="Fenerbahçe">Fenerbahçe</option>
-      <option value="Beşiktaş">Beşiktaş</option>
-      <option value="son">🔴 Sadece Son Dakika</option>
-    </select>
   </div>
 </header>
 
@@ -194,55 +259,56 @@ footer{
 <footer>© 2026 TRansferCephesi</footer>
 
 <script>
-const transfers = [
-  {team:"Galatasaray",player:"Omar Marmoush",from:"Man. City",to:"Galatasaray",date:"14.01.2026",time:"21:35",status:"beklemede",market:"€65 M",prob:65,son:true,image:"https://www.90min.tr/uploads/images/202601/image_870x_69663c27510b7.webp"},
-  {team:"Galatasaray",player:"Ahmet Kutucu",from:"Galatasaray",to:"Real Madrid",date:"14.01.2026",time:"21:38",status:"beklemede",market:"€4 M",prob:40,son:false,image:"https://image.hurimg.com/i/hurriyet/90/0x0/60df23774e3fe111f8e5c811.jpg"},
-  {team:"Galatasaray",player:"Jude Bellingham",from:"Real Madrid",to:"Galatasaray",date:"15.01.2026",time:"08:38",status:"beklemede",market:"€160 M",prob:10,son:false,image:"https://assets.bundesliga.com/contender/2024/4/imago1034602594h.jpg"},
-  {team:"Galatasaray",player:"Hakan Çalhanoğlu",from:"Inter",to:"Galatasaray",date:"14.01.2026",time:"22:35",status:"beklemede",market:"€22 M",prob:55,son:true,image:"https://imgrosetta.mynet.com.tr/file/22927669/1200xauto.jpg"},
-  {team:"Fenerbahçe",player:"N'Golo Kanté",from:"Al-Ittihad",to:"Fenerbahçe",date:"14.01.2026",time:"21:36",status:"gerçekleşti",market:"€4.50 M",prob:100,son:true,image:"https://sonmuhurcom.teimg.com/crop/1280x720/sonmuhur-com/uploads/2026/01/kante-1.jpg"},
+const transfers=[
+{team:"Galatasaray",player:"Omar Marmoush",from:"Man. City",to:"Galatasaray",date:"14.01.2026",time:"21:35",status:"beklemede",market:"€65 M",prob:65,son:true,image:"https://www.90min.tr/uploads/images/202601/image_870x_69663c27510b7.webp"},
+{team:"Galatasaray",player:"Ahmet Kutucu",from:"Galatasaray",to:"Real Madrid",date:"14.01.2026",time:"21:38",status:"beklemede",market:"€4 M",prob:40,son:false,image:"https://image.hurimg.com/i/hurriyet/90/0x0/60df23774e3fe111f8e5c811.jpg"},
+{team:"Galatasaray",player:"Jude Bellingham",from:"Real Madrid",to:"Galatasaray",date:"15.01.2026",time:"08:38",status:"beklemede",market:"€160 M",prob:10,son:false,image:"https://assets.bundesliga.com/contender/2024/4/imago1034602594h.jpg"},
+{team:"Galatasaray",player:"Hakan Çalhanoğlu",from:"Inter",to:"Galatasaray",date:"14.01.2026",time:"22:35",status:"beklemede",market:"€22 M",prob:55,son:true,image:"https://imgrosetta.mynet.com.tr/file/22927669/1200xauto.jpg"},
+{team:"Fenerbahçe",player:"N'Golo Kanté",from:"Al-Ittihad",to:"Fenerbahçe",date:"14.01.2026",time:"21:36",status:"gerçekleşti",market:"€4.5 M",prob:100,son:true,image:"https://sonmuhurcom.teimg.com/crop/1280x720/sonmuhur-com/uploads/2026/01/kante-1.jpg"}
 ];
 
-let active="all";
+let active="all",open=false;
 
 function probClass(p){return p>=60?"high":p>=30?"mid":"low"}
 
 function render(list){
-  const area=document.getElementById("cards");
-  area.innerHTML="";
-  list.forEach(t=>{
-    area.innerHTML+=`
-    <div class="card">
-      ${t.son?'<div class="ribbon">SON DAKİKA</div>':''}
-      <img src="${t.image}">
-      <div class="team">${t.team}</div>
-      <div class="card-body">
-        <div class="player">${t.player}</div>
-        <div class="detail">${t.from} ➜ ${t.to}</div>
-        <div class="market">💰 ${t.market}</div>
-        <div class="prob ${probClass(t.prob)}">📊 %${t.prob}</div>
-        <div class="date">🕒 ${t.date} | ${t.time}</div>
-        <div class="status ${t.status==="gerçekleşti"?"gerceklesmis":"beklemede"}">${t.status.toUpperCase()}</div>
-      </div>
-    </div>`;
-  });
+  cards.innerHTML=list.map(t=>`
+  <div class="card">
+    ${t.son?'<div class="ribbon">SON DAKİKA</div>':''}
+    <img src="${t.image}">
+    <div class="team">${t.team}</div>
+    <div class="card-body">
+      <div class="player">${t.player}</div>
+      <div class="detail">${t.from} ➜ ${t.to}</div>
+      <div class="market">💰 ${t.market}</div>
+      <div class="prob ${probClass(t.prob)}">%${t.prob}</div>
+      <div class="date">🕒 ${t.date} | ${t.time}</div>
+      <div class="status ${t.status==="gerçekleşti"?"gerceklesmis":"beklemede"}">${t.status.toUpperCase()}</div>
+    </div>
+  </div>`).join("");
 }
 
-function filterTeam(v){active=v;searchPlayer()}
-
 function searchPlayer(){
-  const t=document.getElementById("searchInput").value.toLowerCase();
-  let f=transfers.filter(x=>x.player.toLowerCase().includes(t));
-  if(active==="son") f=f.filter(x=>x.son);
-  else if(active!=="all") f=f.filter(x=>x.team===active);
+  let q=searchInput.value.toLowerCase();
+  let f=transfers.filter(t=>t.player.toLowerCase().includes(q));
+  if(active==="son") f=f.filter(t=>t.son);
+  else if(active!=="all") f=f.filter(t=>t.team===active);
   render(f);
 }
 
-render(transfers);
+function toggleFilter(){
+  open=!open;
+  filterPanel.style.left=open?"0":"-280px";
+}
 
-// kayan şeride son dakika isimleri ekle
-document.getElementById("breakingText").innerText =
-  " 🔴 SON DAKİKA • " +
-  transfers.filter(t=>t.son).map(t=>t.player+" transferi").join(" • ");
+function setFilter(v){
+  active=v;
+  searchPlayer();
+  toggleFilter();
+}
+
+render(transfers);
+breakingText.innerText=" 🔴 SON DAKİKA • "+transfers.filter(t=>t.son).map(t=>t.player+" transferi").join(" • ");
 </script>
 
 </body>
